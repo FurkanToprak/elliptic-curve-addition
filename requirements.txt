@@ -1,2 +1,3 @@
 sympy
 pytest
+coverage-badge
