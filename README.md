@@ -1,2 +1,2 @@
 # Elliptic Curve Addition
-Implementation of the Elliptic Curve Addition Algorithm in Python. 
+Well-tested implementation of the Elliptic Curve Addition Algorithm in Python. 

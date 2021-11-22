@@ -45,6 +45,13 @@ class Tester:
             [(12, 11), (9, 6), (12, 2), (9, 7), (2, 3), (2, 10), (1, 8), "O", (1, 5)],
         ]
         c1 = EllipticCurve(3, 8, 13)
+        # verify the entire table
         for i, input1 in enumerate(inputs):
             for j, input2 in enumerate(inputs):
                 assert ver_table[i][j] == c1.add(input1, input2)
+
+        c2 = EllipticCurve(2, 3, 97)
+        assert (1, 54) == c2.add((17, 10), (95, 31))
+
+        c3 = EllipticCurve(7, 8, 101)
+        assert (31, 76) == c3.add((7, 20), (79, 35))
