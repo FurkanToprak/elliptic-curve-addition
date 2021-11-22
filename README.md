@@ -23,3 +23,8 @@ Well-tested implementation of the Elliptic Curve Addition Algorithm in Python.
         <text x="80" y="14">98%</text>
     </g>
 </svg>
+
+### Testing
+```
+coverage run -m pytest && coverage report && coverage-badge
+```
