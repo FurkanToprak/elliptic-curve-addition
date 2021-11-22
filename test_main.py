@@ -55,3 +55,7 @@ class Tester:
 
         c3 = EllipticCurve(7, 8, 101)
         assert (31, 76) == c3.add((7, 20), (79, 35))
+
+        c4 = EllipticCurve(5, 7, 7727)
+        assert (5904, 5297) == c4.add((317, 878), (119, 1426))
+        assert (1574, 3249) == c4.add((317, 878), (18, 77))
