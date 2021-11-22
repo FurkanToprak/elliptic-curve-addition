@@ -1,37 +1,20 @@
-from sympy.functions.elementary.trigonometric import asec
 from main import EllipticCurve
 import pytest
-
-
 class Tester:
-    def testInit(self):
-        # should raise
+    def testInit(self): # testing non-primes and wrong A,B.
         with pytest.raises(ValueError):
-            c0 = EllipticCurve(2, 2, 1)
-        # should raise
+            c0 = EllipticCurve(2, 2, 1) 
         with pytest.raises(ValueError):
             c0 = EllipticCurve(0, 0, 3)
-        # shouldnt raise
-        c1 = EllipticCurve(1, 2, 7)
 
-    def testAddInput(self):
+    def testAddInput(self): # testing "O"
         fixCurve = EllipticCurve(1, 2, 7)
         assert (5, 5) == fixCurve.add("O", (5, 5))
         assert (5, 5) == fixCurve.add((5, 5), "O")
         assert "O" == fixCurve.add("O", "O")
 
     def testActualMath(self):
-        inputs = [
-            "O",
-            (1, 5),
-            (1, 8),
-            (2, 3),
-            (2, 10),
-            (9, 6),
-            (9, 7),
-            (12, 2),
-            (12, 11),
-        ]
+        inputs = ["O", (1, 5), (1, 8), (2, 3), (2, 10), (9, 6), (9, 7), (12, 2), (12, 11)]
         # table from textbook
         ver_table = [
             inputs,  # identity
