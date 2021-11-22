@@ -7,11 +7,9 @@ class EllipticCurve:
         E: Y^2 = X^3 - a*X + b
         """
         if 4 * (a ** 3) + 27 * (b ** 2) == 0:
-            print("Error: Singular curves not excluded. Ensure 4A^3+27B^2!=0.")
-            exit()
+            raise ValueError("Error: Singular curves not excluded. Ensure 4A^3+27B^2!=0.")
         if not isprime(p):
-            return ("Error: Modulo ring is not prime.")
-            exit()
+            raise ValueError("Error: Modulo ring is not prime.")
         self.a = a
         self.b = b
 
@@ -21,14 +19,14 @@ class EllipticCurve:
         p1: (x1, y1) or "O"
         p2: (x2, y2) or "O"
         """
-        if p1 == "o":
+        if p1 == "O":
             return p2
-        elif p2 == "o":
+        elif p2 == "O":
             return p1
         x1, y1 = p1
         x2, y2 = p2
         if x1 == x2 and y1 == -1 * y2:
-            return "o"
+            return "O"
         lamb = None
         if p1 == p2:
             lamb = (3 * (x1 ** 2) + self.a) / (2 * y1)
