@@ -1,1 +1,1 @@
-coverage run -m pytest && coverage report && coverage-badge -p -o coverage.svg
+rm coverage.svg && coverage run -m pytest && coverage report && coverage-badge -p -o coverage.svg
