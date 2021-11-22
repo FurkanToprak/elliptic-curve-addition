@@ -1,5 +1,6 @@
 from sympy import isprime, mod_inverse
 
+
 class EllipticCurve:
     def __init__(self, a, b, p=None):
         """
@@ -7,12 +8,18 @@ class EllipticCurve:
         E: Y^2 = X^3 - a*X + b
         """
         if 4 * (a ** 3) + 27 * (b ** 2) == 0:
-            raise ValueError("Error: Singular curves not excluded. Ensure 4A^3+27B^2!=0.")
+            raise ValueError("Ensure 4A^3+27B^2!=0.")
         if not isprime(p):
             raise ValueError("Error: Modulo ring is not prime.")
         self.a = a
         self.b = b
         self.p = p
+
+    def onCurve(self, p):
+        if p == "O":
+            return False
+        x, y = p
+        return (y ** 2) % self.p == (x ** 3 + self.a * x + self.b) % self.p
 
     def add(self, p1, p2):
         """
@@ -24,6 +31,10 @@ class EllipticCurve:
             return p2
         elif p2 == "O":
             return p1
+        if not self.onCurve(p1):
+            raise ValueError("Point 1 not on curve.")
+        if not self.onCurve(p2):
+            raise ValueError("Point 2 not on curve.")
         x1, y1 = p1
         x2, y2 = p2
         x1 = x1 % self.p
@@ -34,7 +45,10 @@ class EllipticCurve:
             return "O"
         lamb = None
         if p1 == p2:
-            lamb = ((((3 * ((x1 ** 2) % self.p) % self.p) + self.a) % self.p) * mod_inverse(2 * y1, self.p)) % self.p
+            lamb = (
+                (((3 * ((x1 ** 2) % self.p) % self.p) + self.a) % self.p)
+                * mod_inverse(2 * y1, self.p)
+            ) % self.p
         else:
             if x1 == x2:
                 return "O"
