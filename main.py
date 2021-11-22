@@ -1,4 +1,4 @@
-from sympy import isprime
+from sympy import isprime, mod_inverse
 
 class EllipticCurve:
     def __init__(self, a, b, p=None):
@@ -12,6 +12,7 @@ class EllipticCurve:
             raise ValueError("Error: Modulo ring is not prime.")
         self.a = a
         self.b = b
+        self.p = p
 
     def add(self, p1, p2):
         """
@@ -25,13 +26,19 @@ class EllipticCurve:
             return p1
         x1, y1 = p1
         x2, y2 = p2
-        if x1 == x2 and y1 == -1 * y2:
+        x1 = x1 % self.p
+        x2 = x2 % self.p
+        y1 = y1 % self.p
+        y2 = y2 % self.p
+        if (x1 % self.p) == (x2 % self.p) and y1 == -1 * y2:
             return "O"
         lamb = None
         if p1 == p2:
-            lamb = (3 * (x1 ** 2) + self.a) / (2 * y1)
+            lamb = ((((3 * ((x1 ** 2) % self.p) % self.p) + self.a) % self.p) * mod_inverse(2 * y1, self.p)) % self.p
         else:
-            lamb = (y2 - y1) / (x2 - x1)
-        x3 = lamb ** 2 - x1 - x2
-        y3 = lamb * (x1 - x3) - y1
+            if x1 == x2:
+                return "O"
+            lamb = (((y2 - y1) % self.p) * mod_inverse((x2 - x1), self.p)) % self.p
+        x3 = (((lamb ** 2) % self.p) - x1 - x2) % self.p
+        y3 = (((lamb * (x1 - x3)) % self.p) - y1) % self.p
         return (x3, y3)
