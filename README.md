@@ -2,7 +2,6 @@
 
 Well-tested implementation of the Elliptic Curve Addition Algorithm in Python. 
 
-<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="99" height="20">
     <linearGradient id="b" x2="0" y2="100%">
         <stop offset="0" stop-color="#bbb" stop-opacity=".1"/>
