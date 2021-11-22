@@ -12,8 +12,11 @@ class Tester:
         # shouldnt raise
         c1 = EllipticCurve(1, 2, 7)
 
-    def testAddInput():
+    def testAddInput(self):
         fixCurve = EllipticCurve(1, 2, 7)
         assert (5, 5) == fixCurve.add("O", (5, 5))
-        assert (5, 5) == fixCurve.add((5, 5) == "O")
+        assert (5, 5) == fixCurve.add((5, 5), "O")
         assert "O" == fixCurve.add("O", "O")
+    
+    def testActualMath(self):
+        c1 = EllipticCurve(1, 2, 7)
